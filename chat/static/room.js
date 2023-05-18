@@ -31,7 +31,8 @@ chatSocket.onmessage = function(e) {
         messageElement.classList.add('message', 'receiver')
     }
 
-    chatLog.appendChild(messageElement)
+    chatLog.prepend(messageElement)
+    chatLog.scrollTop = chatLog.scrollHeight;
 
     if (document.querySelector('#emptyText')) {
         document.querySelector('#emptyText').remove()

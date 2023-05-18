@@ -17,18 +17,7 @@
 </main>
 
 <footer>
-    <nav class="navbar fixed-bottom navbar-light bg-light">
-        <div class="d-flex justify-content-around w-100">
-            <a class="nav-link" href="{% url 'user-list' %}">Users</a>
-            {% if request.user.get_last_chatroom %}
-            <a class="nav-link" href="{% url 'room' room_name=request.user.get_last_chatroom.name %}">Last
-                Chat</a>
-            {% else %}
-            <a class="nav-link" href="{% url 'chats' %}">Chats</a>
-            {% endif %}
-            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-        </div>
-    </nav>
+    {% block footer %} {% endblock %}
 </footer>
 
 {% block extrajs %}{% endblock %}

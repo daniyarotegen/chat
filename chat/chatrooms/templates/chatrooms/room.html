@@ -18,13 +18,18 @@
     </div>
 </div>
 
-<div class="container">
-    <input class="textInput" id="chat-message-input" type="text" size="100"><br>
-    <input class="button" id="chat-message-submit" type="button" value="Send">
+<div class="footer">
+    <div class="message-input">
+        <input class="textInput" id="chat-message-input" type="text" size="100">
+        <input class="button" id="chat-message-submit" type="button" value="Send">
+    </div>
     {{ room_name|json_script:"room-name" }}
 </div>
 {{ request.user.id|json_script:"user_id" }}
 {% endblock %}
 {% block extrajs %}
-<script src="{% static 'room.js' %}"></script>
+<script src="{% static 'room.js' %}">
+    var chatLog = document.getElementById('chat-log');
+    chatLog.scrollTop = chatLog.scrollHeight;
+</script>
 {% endblock %}

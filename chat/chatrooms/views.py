@@ -39,7 +39,7 @@ class Room(LoginRequiredMixin, View):
             room.save()
 
         if room:
-            chats = Chat.objects.filter(room=room)
+            chats = Chat.objects.filter(room=room).order_by('-timestamp')
 
         return render(request, 'chatrooms/room.html', {'room_name': room_name, 'chats': chats})
 
