@@ -6,5 +6,5 @@ urlpatterns = [
     path("users/", UserListView.as_view(), name="user-list"),
     path('chats/', ChatsView.as_view(), name='chats'),
     path("<str:room_name>/", Room.as_view(), name="room"),
-    path("profile/", ProfileView.as_view(), name="profile"),
+
 ]
