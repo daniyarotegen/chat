@@ -11,6 +11,18 @@ class Index(LoginRequiredMixin, View):
         return render(request, 'chatrooms/index.html')
 
 
+class ChatsView(LoginRequiredMixin, View):
+    def get(self, request):
+        chatrooms = ChatRoom.objects.filter(chat__user=request.user).distinct()
+        chats_with_recipients = []
+        for room in chatrooms:
+            chat = room.chat_set.order_by('-timestamp').first()
+            recipient_id = list(set(room.name.split("_")) - {str(request.user.id)})[0]
+            recipient = User.objects.get(id=recipient_id)
+            chats_with_recipients.append({'chat': chat, 'recipient': recipient})
+        return render(request, 'chatrooms/chats.html', {'chats_with_recipients': chats_with_recipients})
+
+
 class Room(LoginRequiredMixin, View):
     def get(self, request, room_name):
         recipient_user = User.objects.filter(username=room_name).first()

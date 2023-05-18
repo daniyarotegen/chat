@@ -1,0 +1,18 @@
+{% extends "chatrooms/base.html" %}
+{% block content %}
+<div class="container">
+    {% if chats_with_recipients %}
+        {% for item in chats_with_recipients %}
+            <div>
+                <strong>Room:</strong> {{ item.chat.room.name }}<br>
+                <strong>Message:</strong> {{ item.chat.content }}<br>
+                <strong>Time:</strong> {{ item.chat.timestamp }}<br>
+                <a href="{% url 'room' room_name=item.recipient.username %}">Go to chat</a>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No messages yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

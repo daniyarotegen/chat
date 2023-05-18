@@ -24,7 +24,7 @@
             <a class="nav-link" href="{% url 'room' room_name=request.user.get_last_chatroom.name %}">Last
                 Chat</a>
             {% else %}
-            <a class="nav-link disabled">Last Chat</a>
+            <a class="nav-link" href="{% url 'chats' %}">Chats</a>
             {% endif %}
             <a class="nav-link" href="{% url 'profile' %}">Profile</a>
         </div>
