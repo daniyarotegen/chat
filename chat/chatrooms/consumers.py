@@ -9,12 +9,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
 
+        self.room = await self.get_or_create_room(self.room_name)
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
 
         await self.accept()
+
+    @database_sync_to_async
+    def get_or_create_room(self, room_name):
+        room, created = ChatRoom.objects.get_or_create(name=room_name)
+        return room
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(
