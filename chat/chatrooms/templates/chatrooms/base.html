@@ -1,0 +1,36 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    {% block extrahead %}{% endblock %}
+</head>
+<body>
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <div class="d-flex justify-content-around w-100">
+            <a class="nav-link" href="{% url 'user-list' %}">Users</a>
+            {% if request.user.get_last_chatroom %}
+            <a class="nav-link" href="{% url 'room' room_name=request.user.get_last_chatroom.name %}">Last
+                Chat</a>
+            {% else %}
+            <a class="nav-link disabled">Last Chat</a>
+            {% endif %}
+            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        </div>
+    </nav>
+</footer>
+
+{% block extrajs %}{% endblock %}
+</body>
+</html>

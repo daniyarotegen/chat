@@ -1,16 +1,7 @@
+{% extends "chatrooms/base.html" %}
+{% load bootstrap5 %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-</head>
-<body>
-{% include 'chatrooms/nav.html' %}
-<a class="leaveButton" href="{% url 'index' %}">Leave Room</a>
-
+{% block content %}
 <div class="container">
     <div id="chat-log">
         {% for chat in chats.all %}
@@ -32,8 +23,8 @@
     <input class="button" id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
 </div>
-
 {{ request.user.id|json_script:"user_id" }}
+{% endblock %}
+{% block extrajs %}
 <script src="{% static 'room.js' %}"></script>
-</body>
-</html>
+{% endblock %}

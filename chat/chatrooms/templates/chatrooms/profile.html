@@ -1,0 +1,10 @@
+{% extends "chatrooms/base.html" %}
+{% load bootstrap5 %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <h1>Profile</h1>
+  <p>Username: {{ request.user.username }}</p>
+  <a class="btn btn-primary" href="{% url 'account_logout' %}">Logout</a>
+</div>
+{% endblock %}

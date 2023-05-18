@@ -36,3 +36,8 @@ class UserListView(LoginRequiredMixin, View):
     def get(self, request):
         users = User.objects.exclude(id=request.user.id)
         return render(request, 'chatrooms/user_list.html', {'users': users})
+
+
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'chatrooms/profile.html')
